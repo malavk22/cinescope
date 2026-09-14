@@ -8,13 +8,18 @@ and get **"More like this"** recommendations. Powered by the
 
 - **Accounts:** register and log in. Each user has their own favourites and
   history. Passwords are stored as a salted SHA-256 hash, never as plain text.
+- **Recommended for you:** personal picks on the home screen, based on the
+  genres of your favourites ("Because you like Horror & Mystery").
 - **Popular picks:** a poster grid of top-rated movies on the home screen, so
   there's something to explore before you search.
 - **Search:** find movies and series by title, with posters.
-- **Movie details:** poster, IMDb rating, genre, runtime, director, cast, and
-  full plot.
+- **Movie details:** poster, genre, runtime, director, cast, and full plot.
+- **Ratings & awards:** IMDb, Rotten Tomatoes, and Metacritic scores side by
+  side, plus awards, box office, age rating, and release date.
 - **More like this:** recommendations on every movie page (see below).
-- **Favourites:** tap the heart to save a movie. Favourites load in parallel.
+- **Favourites:** tap the heart in search results or on a movie's page.
+  Favourites load in parallel.
+- **Home button:** tap "CineScope" or the 🏠 icon to get back home from anywhere.
 - **Search history:** tap a past search to run it again.
 - **Light / dark theme:** the choice is remembered between launches.
 - **Friendly errors:** clear messages and a "Try again" button when offline.
