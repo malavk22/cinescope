@@ -9,6 +9,7 @@ import 'history_screen.dart';
 import 'poster_card.dart';
 import 'recommendations.dart';
 import 'welcome_screen.dart';
+import 'watchlist_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   final VoidCallback toggleTheme;
@@ -185,6 +186,16 @@ class _HomeScreenState extends State<HomeScreen> {
                 value: 2,
                 child: Row(
                   children: const [
+                    Icon(Icons.bookmark),
+                    SizedBox(width: 10),
+                    Text("Watchlist"),
+                  ],
+                ),
+              ),
+              PopupMenuItem(
+                value: 3,
+                child: Row(
+                  children: const [
                     Icon(Icons.history, size: 20),
                     SizedBox(width: 10),
                     Text("History"),
@@ -192,7 +203,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
               ),
               PopupMenuItem(
-                value: 3,
+                value: 4,
                 child: Row(
                   children: const [
                     Icon(Icons.logout, size: 20),
@@ -210,6 +221,11 @@ class _HomeScreenState extends State<HomeScreen> {
                 );
                 loadUser();
               } else if (value == 2) {
+                await Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (_) => const WatchlistScreen()),
+                );
+              } else if (value == 3) {
                 final result = await Navigator.push(
                   context,
                   MaterialPageRoute(builder: (_) => const HistoryScreen()),
@@ -219,7 +235,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   searchController.text = result;
                   searchMovies(result);
                 }
-              } else if (value == 3) {
+              } else if (value == 4) {
                 logout();
               }
             },
@@ -294,70 +310,70 @@ class _HomeScreenState extends State<HomeScreen> {
             Expanded(
               child: movies.isEmpty
                   ? popular.isEmpty
-                      ? Center(
-                          child: Text(
-                            "Search movies to see results",
-                            style: TextStyle(
-                              color: theme.colorScheme.onSurface.withOpacity(
-                                0.7,
-                              ),
-                              fontSize: 16,
-                            ),
-                          ),
-                        )
-                      : CustomScrollView(
-                          slivers: [
-                            // ---------------- RECOMMENDED FOR YOU ----------------
-                            if (recommended.isNotEmpty) ...[
-                              SliverToBoxAdapter(
-                                child: sectionTitle(
-                                  "Recommended for you",
-                                  "Because you like ${topGenres.join(" & ")}",
+                        ? Center(
+                            child: Text(
+                              "Search movies to see results",
+                              style: TextStyle(
+                                color: theme.colorScheme.onSurface.withOpacity(
+                                  0.7,
                                 ),
+                                fontSize: 16,
                               ),
-                              SliverToBoxAdapter(
-                                child: SizedBox(
-                                  height: 210,
-                                  child: ListView.separated(
-                                    scrollDirection: Axis.horizontal,
-                                    itemCount: recommended.length,
-                                    separatorBuilder: (_, _) =>
-                                        const SizedBox(width: 12),
-                                    itemBuilder: (context, i) => SizedBox(
-                                      width: 110,
-                                      child: PosterCard(
-                                        movie: recommended[i],
-                                        onReturn: loadUser,
+                            ),
+                          )
+                        : CustomScrollView(
+                            slivers: [
+                              // ---------------- RECOMMENDED FOR YOU ----------------
+                              if (recommended.isNotEmpty) ...[
+                                SliverToBoxAdapter(
+                                  child: sectionTitle(
+                                    "Recommended for you",
+                                    "Because you like ${topGenres.join(" & ")}",
+                                  ),
+                                ),
+                                SliverToBoxAdapter(
+                                  child: SizedBox(
+                                    height: 210,
+                                    child: ListView.separated(
+                                      scrollDirection: Axis.horizontal,
+                                      itemCount: recommended.length,
+                                      separatorBuilder: (_, _) =>
+                                          const SizedBox(width: 12),
+                                      itemBuilder: (context, i) => SizedBox(
+                                        width: 110,
+                                        child: PosterCard(
+                                          movie: recommended[i],
+                                          onReturn: loadUser,
+                                        ),
                                       ),
                                     ),
                                   ),
                                 ),
+                                const SliverToBoxAdapter(
+                                  child: SizedBox(height: 24),
+                                ),
+                              ],
+
+                              // ------------------- POPULAR PICKS -------------------
+                              SliverToBoxAdapter(
+                                child: sectionTitle("Popular picks"),
                               ),
-                              const SliverToBoxAdapter(
-                                child: SizedBox(height: 24),
+                              SliverGrid.builder(
+                                gridDelegate:
+                                    const SliverGridDelegateWithMaxCrossAxisExtent(
+                                      maxCrossAxisExtent: 140,
+                                      childAspectRatio: 0.52,
+                                      crossAxisSpacing: 12,
+                                      mainAxisSpacing: 16,
+                                    ),
+                                itemCount: popular.length,
+                                itemBuilder: (context, i) => PosterCard(
+                                  movie: popular[i],
+                                  onReturn: loadUser,
+                                ),
                               ),
                             ],
-
-                            // ------------------- POPULAR PICKS -------------------
-                            SliverToBoxAdapter(
-                              child: sectionTitle("Popular picks"),
-                            ),
-                            SliverGrid.builder(
-                              gridDelegate:
-                                  const SliverGridDelegateWithMaxCrossAxisExtent(
-                                    maxCrossAxisExtent: 140,
-                                    childAspectRatio: 0.52,
-                                    crossAxisSpacing: 12,
-                                    mainAxisSpacing: 16,
-                                  ),
-                              itemCount: popular.length,
-                              itemBuilder: (context, i) => PosterCard(
-                                movie: popular[i],
-                                onReturn: loadUser,
-                              ),
-                            ),
-                          ],
-                        )
+                          )
                   : ListView.builder(
                       itemCount: movies.length,
                       itemBuilder: (context, i) {
