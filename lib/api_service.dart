@@ -12,15 +12,21 @@ class ApiService {
       throw Exception("OMDb API key missing. See README → Setup.");
     }
     final uri = Uri.https("www.omdbapi.com", "/", {"apikey": apiKey, ...params});
-    final res = await http.get(uri).timeout(const Duration(seconds: 15));
+
+    final http.Response res;
+    try {
+      res = await http.get(uri).timeout(const Duration(seconds: 15));
+    } catch (_) {
+      throw Exception("Can't reach OMDb. Check your internet connection.");
+    }
     if (res.statusCode != 200) {
       throw Exception("Server error (${res.statusCode})");
     }
     return jsonDecode(res.body) as Map<String, dynamic>;
   }
 
-  static Future<List<MovieModel>> searchMovies(String q) async {
-    final data = await _get({"s": q});
+  static Future<List<MovieModel>> searchMovies(String q, {String? type}) async {
+    final data = await _get({"s": q, if (type != null) "type": type});
     if (data["Response"] == "False") return [];
     return (data["Search"] as List).map((e) => MovieModel.fromJson(e)).toList();
   }

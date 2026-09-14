@@ -30,11 +30,21 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
 
     List<Map<String, dynamic>> loadedMovies = [];
 
-    for (String id in favIds) {
-      final movie = await ApiService.getMovieDetails(id);
-      loadedMovies.add(movie);
+    try {
+      // Fetch all favourites at the same time instead of one after another.
+      final results = await Future.wait(favIds.map(ApiService.getMovieDetails));
+      loadedMovies = results.where((m) => m["Response"] == "True").toList();
+    } catch (_) {
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text("Couldn't load favourites. Check your connection."),
+          ),
+        );
+      }
     }
 
+    if (!mounted) return;
     setState(() {
       favoriteMovies = loadedMovies;
       isLoading = false;

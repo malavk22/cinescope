@@ -1,30 +1,87 @@
-// This is a basic Flutter widget test.
-//
-// To perform an interaction with a widget in your test, use the WidgetTester
-// utility in the flutter_test package. For example, you can send tap and scroll
-// gestures. You can also use WidgetTester to find child widgets in the widget
-// tree, read text, and verify that the values of widget properties are correct.
-
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
+import 'package:movie_browser_app/auth.dart';
 import 'package:movie_browser_app/main.dart';
+import 'package:movie_browser_app/movie_details_screen.dart';
 
 void main() {
-  testWidgets('Counter increments smoke test', (WidgetTester tester) async {
-    // Build our app and trigger a frame.
+  setUp(() => SharedPreferences.setMockInitialValues({}));
+
+  Finder field(String label) => find.widgetWithText(TextField, label);
+  Finder button(String label) => find.widgetWithText(ElevatedButton, label);
+
+  testWidgets("register validates input, then the new account can log in", (
+    tester,
+  ) async {
     await tester.pumpWidget(const MovieBrowserApp());
+    await tester.pumpAndSettle();
 
-    // Verify that our counter starts at 0.
-    expect(find.text('0'), findsOneWidget);
-    expect(find.text('1'), findsNothing);
+    await tester.tap(find.text("New user? Register"));
+    await tester.pumpAndSettle();
+    expect(find.text("Join CineScope"), findsOneWidget);
 
-    // Tap the '+' icon and trigger a frame.
-    await tester.tap(find.byIcon(Icons.add));
-    await tester.pump();
+    // Empty form shows validation errors.
+    await tester.tap(button("Create account"));
+    await tester.pumpAndSettle();
+    expect(find.text("Username must be at least 3 characters"), findsOneWidget);
+    expect(find.text("Password must be at least 6 characters"), findsOneWidget);
 
-    // Verify that our counter has incremented.
-    expect(find.text('0'), findsNothing);
-    expect(find.text('1'), findsOneWidget);
+    // Mismatched confirmation is rejected.
+    await tester.enterText(field("Username"), "demo_user");
+    await tester.enterText(field("Password"), "secret123");
+    await tester.enterText(field("Confirm password"), "secret12");
+    await tester.tap(button("Create account"));
+    await tester.pumpAndSettle();
+    expect(find.text("Passwords don't match"), findsOneWidget);
+
+    await tester.enterText(field("Confirm password"), "secret123");
+    await tester.tap(button("Create account"));
+    await tester.pumpAndSettle();
+
+    // Back on the login screen; the password is stored hashed.
+    expect(find.text("Account created! Log in to continue."), findsOneWidget);
+    final prefs = await SharedPreferences.getInstance();
+    expect(
+      prefs.getString("user_demo_user"),
+      hashPassword("demo_user", "secret123"),
+    );
+
+    await tester.enterText(field("Password"), "secret123");
+    await tester.tap(button("Login"));
+    await tester.pumpAndSettle();
+    expect(find.text("Search movies..."), findsOneWidget);
+    expect(find.text("Popular picks"), findsOneWidget);
+    expect(find.text("The Shawshank Redemption"), findsOneWidget);
+  });
+
+  testWidgets("wrong password is rejected", (tester) async {
+    SharedPreferences.setMockInitialValues({
+      "user_demo_user": hashPassword("demo_user", "secret123"),
+    });
+    await tester.pumpWidget(const MovieBrowserApp());
+    await tester.pumpAndSettle();
+
+    await tester.enterText(field("Username"), "demo_user");
+    await tester.enterText(field("Password"), "wrongpass");
+    await tester.tap(button("Login"));
+    await tester.pumpAndSettle();
+
+    expect(find.text("Invalid username or password"), findsOneWidget);
+    expect(find.text("Search movies..."), findsNothing);
+  });
+
+  testWidgets("movie details shows 'Try again' instead of spinning forever", (
+    tester,
+  ) async {
+    // Tests run without an API key, so the request fails immediately.
+    await tester.pumpWidget(
+      const MaterialApp(home: MovieDetailsScreen(imdbID: "tt1375666")),
+    );
+    await tester.pumpAndSettle();
+
+    expect(find.text("Try again"), findsOneWidget);
+    expect(find.byType(CircularProgressIndicator), findsNothing);
   });
 }

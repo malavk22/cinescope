@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'auth.dart';
 import 'home_screen.dart';
+import 'register_screen.dart';
 
 class WelcomeScreen extends StatefulWidget {
   final VoidCallback toggleTheme;
@@ -15,17 +17,26 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
   final TextEditingController passController = TextEditingController();
 
   Future<void> login() async {
-    final prefs = await SharedPreferences.getInstance();
-
     final username = userController.text.trim();
     final password = passController.text.trim();
 
-    if (username.isEmpty || password.isEmpty) return;
+    if (username.isEmpty || password.isEmpty) {
+      showMessage("Enter your username and password");
+      return;
+    }
 
+    final prefs = await SharedPreferences.getInstance();
     final savedPassword = prefs.getString("user_$username");
+    final hashed = hashPassword(username, password);
 
+    // Accounts created before hashing stored the plain password: upgrade them.
     if (savedPassword == password) {
-      prefs.setString("currentUser", username);
+      await prefs.setString("user_$username", hashed);
+    }
+
+    if (savedPassword == hashed || savedPassword == password) {
+      await prefs.setString("currentUser", username);
+      if (!mounted) return;
 
       Navigator.pushReplacement(
         context,
@@ -34,28 +45,24 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
         ),
       );
     } else {
-      showMessage("Invalid credentials");
+      showMessage("Invalid username or password");
     }
   }
 
-  Future<void> register() async {
-    final prefs = await SharedPreferences.getInstance();
+  Future<void> openRegister() async {
+    final username = await Navigator.push<String>(
+      context,
+      MaterialPageRoute(builder: (_) => const RegisterScreen()),
+    );
+    if (username == null || !mounted) return;
 
-    final username = userController.text.trim();
-    final password = passController.text.trim();
-
-    if (username.isEmpty || password.isEmpty) return;
-
-    if (prefs.containsKey("user_$username")) {
-      showMessage("User already exists");
-      return;
-    }
-
-    prefs.setString("user_$username", password);
-    showMessage("User registered! Now login");
+    userController.text = username;
+    passController.clear();
+    showMessage("Account created! Log in to continue.");
   }
 
   void showMessage(String msg) {
+    if (!mounted) return;
     ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(msg)));
   }
 
@@ -63,7 +70,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Movie Browser App"),
+        title: const Text("CineScope"),
         actions: [
           IconButton(
             icon: const Icon(Icons.brightness_6),
@@ -137,6 +144,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                         ),
                       ),
                       style: const TextStyle(color: Colors.white),
+                      onSubmitted: (_) => login(),
                     ),
 
                     const SizedBox(height: 25),
@@ -158,7 +166,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                     const SizedBox(height: 10),
 
                     TextButton(
-                      onPressed: register,
+                      onPressed: openRegister,
                       child: const Text(
                         "New user? Register",
                         style: TextStyle(color: Colors.white70),

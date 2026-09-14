@@ -6,6 +6,8 @@ import 'movie_model.dart';
 import 'movie_details_screen.dart';
 import 'favorites_screen.dart';
 import 'history_screen.dart';
+import 'poster_card.dart';
+import 'recommendations.dart';
 import 'welcome_screen.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -19,6 +21,7 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   String user = "";
   List<MovieModel> movies = [];
+  List<MovieModel> popular = [];
   List<String> favorites = [];
   bool loading = false;
 
@@ -28,6 +31,7 @@ class _HomeScreenState extends State<HomeScreen> {
   void initState() {
     super.initState();
     loadUser();
+    loadPopular();
   }
 
   Future<void> loadUser() async {
@@ -35,6 +39,11 @@ class _HomeScreenState extends State<HomeScreen> {
     user = prefs.getString("currentUser") ?? "";
     favorites = prefs.getStringList("${user}_favorites") ?? [];
     setState(() {});
+  }
+
+  Future<void> loadPopular() async {
+    final list = await Recommendations.popular();
+    if (mounted) setState(() => popular = list);
   }
 
   String getUserInitials() {
@@ -67,8 +76,19 @@ class _HomeScreenState extends State<HomeScreen> {
     }
 
     setState(() => loading = true);
-    movies = await ApiService.searchMovies(query);
-    setState(() => loading = false);
+    try {
+      movies = await ApiService.searchMovies(query);
+      if (movies.isEmpty) showMessage('No movies found for "$query"');
+    } catch (e) {
+      showMessage("$e".replaceFirst("Exception: ", ""));
+    } finally {
+      if (mounted) setState(() => loading = false);
+    }
+  }
+
+  void showMessage(String msg) {
+    if (!mounted) return;
+    ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(msg)));
   }
 
   Future<void> toggleFavorite(String imdbID) async {
@@ -91,7 +111,7 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       backgroundColor: theme.colorScheme.surface,
       appBar: AppBar(
-        title: const Text("Movie Browser"),
+        title: const Text("CineScope"),
         actions: [
           PopupMenuButton<int>(
             offset: const Offset(0, 45),
@@ -220,17 +240,46 @@ class _HomeScreenState extends State<HomeScreen> {
 
             Expanded(
               child: movies.isEmpty
-                  ? Center(
-                      child: Text(
-                        "Search movies to see results",
-                        style: TextStyle(
-                          color: theme.colorScheme.onSurface.withOpacity(
-                            0.7,
+                  ? popular.isEmpty
+                      ? Center(
+                          child: Text(
+                            "Search movies to see results",
+                            style: TextStyle(
+                              color: theme.colorScheme.onSurface.withOpacity(
+                                0.7,
+                              ),
+                              fontSize: 16,
+                            ),
                           ),
-                          fontSize: 16,
-                        ),
-                      ),
-                    )
+                        )
+                      // ------------------- POPULAR PICKS ---------------------
+                      : Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            const Text(
+                              "Popular picks",
+                              style: TextStyle(
+                                fontSize: 20,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            const SizedBox(height: 12),
+                            Expanded(
+                              child: GridView.builder(
+                                gridDelegate:
+                                    const SliverGridDelegateWithMaxCrossAxisExtent(
+                                      maxCrossAxisExtent: 140,
+                                      childAspectRatio: 0.52,
+                                      crossAxisSpacing: 12,
+                                      mainAxisSpacing: 16,
+                                    ),
+                                itemCount: popular.length,
+                                itemBuilder: (context, i) =>
+                                    PosterCard(movie: popular[i]),
+                              ),
+                            ),
+                          ],
+                        )
                   : ListView.builder(
                       itemCount: movies.length,
                       itemBuilder: (context, i) {

@@ -28,6 +28,7 @@ environment:
 # the latest version available on pub.dev. To see which dependencies have newer
 # versions available, run `flutter pub outdated`.
 dependencies:
+  crypto: ^3.0.7
   flutter:
     sdk: flutter
   http: ^0.13.6
@@ -52,8 +53,8 @@ dev_dependencies:
 flutter:
   uses-material-design: true
 
-  #assets:
-   # - assets/oboi35.jpg
+  assets:
+    - assets/catalog.json
 
   #   - images/a_dot_ham.jpeg
 

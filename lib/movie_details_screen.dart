@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'api_service.dart';
+import 'movie_model.dart';
+import 'poster_card.dart';
+import 'recommendations.dart';
 
 class MovieDetailsScreen extends StatefulWidget {
   final String imdbID;
@@ -12,6 +16,8 @@ class MovieDetailsScreen extends StatefulWidget {
 
 class _MovieDetailsScreenState extends State<MovieDetailsScreen> {
   Map<String, dynamic>? movie;
+  List<MovieModel> similar = [];
+  String? error;
 
   @override
   void initState() {
@@ -19,13 +25,60 @@ class _MovieDetailsScreenState extends State<MovieDetailsScreen> {
     loadMovieDetails();
   }
 
-  void loadMovieDetails() async {
-    movie = await ApiService.getMovieDetails(widget.imdbID);
-    setState(() {});
+  Future<void> loadMovieDetails() async {
+    try {
+      final data = await ApiService.getMovieDetails(widget.imdbID);
+      if (data["Response"] == "False") {
+        throw Exception(data["Error"] ?? "Movie not found");
+      }
+      if (!mounted) return;
+      setState(() => movie = data);
+
+      // Suggest movies the user hasn't already favourited.
+      final prefs = await SharedPreferences.getInstance();
+      final user = prefs.getString("currentUser") ?? "";
+      final favorites = prefs.getStringList("${user}_favorites") ?? [];
+      final recs = await Recommendations.forMovie(
+        data,
+        exclude: favorites.toSet(),
+      );
+      if (mounted) setState(() => similar = recs);
+    } catch (e) {
+      if (mounted && movie == null) {
+        setState(() => error = "$e".replaceFirst("Exception: ", ""));
+      }
+    }
   }
 
   @override
   Widget build(BuildContext context) {
+    if (error != null) {
+      return Scaffold(
+        appBar: AppBar(),
+        body: Center(
+          child: Padding(
+            padding: const EdgeInsets.all(24),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                const Icon(Icons.wifi_off, size: 60),
+                const SizedBox(height: 12),
+                Text(error!, textAlign: TextAlign.center),
+                const SizedBox(height: 16),
+                ElevatedButton(
+                  onPressed: () {
+                    setState(() => error = null);
+                    loadMovieDetails();
+                  },
+                  child: const Text("Try again"),
+                ),
+              ],
+            ),
+          ),
+        ),
+      );
+    }
+
     if (movie == null) {
       return const Scaffold(
         body: Center(child: CircularProgressIndicator()),
@@ -109,6 +162,31 @@ class _MovieDetailsScreenState extends State<MovieDetailsScreen> {
               textAlign: TextAlign.justify,
               style: const TextStyle(fontSize: 16),
             ),
+
+            // Recommendations
+            if (similar.isNotEmpty) ...[
+              const SizedBox(height: 28),
+              const Text(
+                "More like this",
+                style: TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              const SizedBox(height: 12),
+              SizedBox(
+                height: 210,
+                child: ListView.separated(
+                  scrollDirection: Axis.horizontal,
+                  itemCount: similar.length,
+                  separatorBuilder: (_, __) => const SizedBox(width: 12),
+                  itemBuilder: (context, i) => SizedBox(
+                    width: 110,
+                    child: PosterCard(movie: similar[i]),
+                  ),
+                ),
+              ),
+            ],
           ],
         ),
       ),
