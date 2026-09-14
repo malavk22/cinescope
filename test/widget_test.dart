@@ -3,6 +3,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'package:movie_browser_app/auth.dart';
+import 'package:movie_browser_app/home_screen.dart';
 import 'package:movie_browser_app/main.dart';
 import 'package:movie_browser_app/movie_details_screen.dart';
 
@@ -54,6 +55,20 @@ void main() {
     expect(find.text("Search movies..."), findsOneWidget);
     expect(find.text("Popular picks"), findsOneWidget);
     expect(find.text("The Shawshank Redemption"), findsOneWidget);
+    // A new user has no favourites yet, so no personal picks.
+    expect(find.text("Recommended for you"), findsNothing);
+
+    // Home button on another screen returns to the home screen.
+    await tester.tap(find.text("DE")); // avatar with the user's initials
+    await tester.pumpAndSettle();
+    await tester.tap(find.text("Favourites"));
+    await tester.pumpAndSettle();
+    expect(find.text("My Favourites"), findsOneWidget);
+
+    await tester.tap(find.byTooltip("Home"));
+    await tester.pumpAndSettle();
+    expect(find.text("My Favourites"), findsNothing);
+    expect(find.text("Popular picks"), findsOneWidget);
   });
 
   testWidgets("wrong password is rejected", (tester) async {
@@ -70,6 +85,22 @@ void main() {
 
     expect(find.text("Invalid username or password"), findsOneWidget);
     expect(find.text("Search movies..."), findsNothing);
+  });
+
+  testWidgets("home shows 'Recommended for you' based on favourites", (
+    tester,
+  ) async {
+    SharedPreferences.setMockInitialValues({
+      "currentUser": "demo_user",
+      // The Conjuring + Get Out
+      "demo_user_favorites": ["tt1457767", "tt5052448"],
+    });
+    await tester.pumpWidget(MaterialApp(home: HomeScreen(toggleTheme: () {})));
+    await tester.pumpAndSettle();
+
+    expect(find.text("Recommended for you"), findsOneWidget);
+    expect(find.text("Because you like Horror & Mystery"), findsOneWidget);
+    expect(find.text("Gone Girl"), findsWidgets);
   });
 
   testWidgets("movie details shows 'Try again' instead of spinning forever", (
