@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'api_service.dart';
+import 'home_button.dart';
 import 'movie_model.dart';
 import 'poster_card.dart';
+import 'ratings_panel.dart';
 import 'recommendations.dart';
 
 class MovieDetailsScreen extends StatefulWidget {
@@ -17,6 +19,7 @@ class MovieDetailsScreen extends StatefulWidget {
 class _MovieDetailsScreenState extends State<MovieDetailsScreen> {
   Map<String, dynamic>? movie;
   List<MovieModel> similar = [];
+  bool isFavorite = false;
   String? error;
 
   @override
@@ -31,13 +34,18 @@ class _MovieDetailsScreenState extends State<MovieDetailsScreen> {
       if (data["Response"] == "False") {
         throw Exception(data["Error"] ?? "Movie not found");
       }
-      if (!mounted) return;
-      setState(() => movie = data);
+      Recommendations.rememberGenre(widget.imdbID, data["Genre"]);
 
-      // Suggest movies the user hasn't already favourited.
       final prefs = await SharedPreferences.getInstance();
       final user = prefs.getString("currentUser") ?? "";
       final favorites = prefs.getStringList("${user}_favorites") ?? [];
+      if (!mounted) return;
+      setState(() {
+        movie = data;
+        isFavorite = favorites.contains(widget.imdbID);
+      });
+
+      // Suggest movies the user hasn't already favourited.
       final recs = await Recommendations.forMovie(
         data,
         exclude: favorites.toSet(),
@@ -50,11 +58,37 @@ class _MovieDetailsScreenState extends State<MovieDetailsScreen> {
     }
   }
 
+  Future<void> toggleFavorite() async {
+    final prefs = await SharedPreferences.getInstance();
+    final user = prefs.getString("currentUser") ?? "";
+    final favorites = prefs.getStringList("${user}_favorites") ?? [];
+
+    if (isFavorite) {
+      favorites.remove(widget.imdbID);
+    } else {
+      favorites.add(widget.imdbID);
+    }
+    await prefs.setStringList("${user}_favorites", favorites);
+
+    if (!mounted) return;
+    setState(() => isFavorite = !isFavorite);
+    ScaffoldMessenger.of(context)
+      ..hideCurrentSnackBar()
+      ..showSnackBar(
+        SnackBar(
+          content: Text(
+            isFavorite ? "Added to favourites" : "Removed from favourites",
+          ),
+          duration: const Duration(seconds: 2),
+        ),
+      );
+  }
+
   @override
   Widget build(BuildContext context) {
     if (error != null) {
       return Scaffold(
-        appBar: AppBar(),
+        appBar: AppBar(actions: const [HomeButton()]),
         body: Center(
           child: Padding(
             padding: const EdgeInsets.all(24),
@@ -88,6 +122,17 @@ class _MovieDetailsScreenState extends State<MovieDetailsScreen> {
     return Scaffold(
       appBar: AppBar(
         title: Text(movie!['Title']),
+        actions: [
+          IconButton(
+            icon: Icon(
+              isFavorite ? Icons.favorite : Icons.favorite_border,
+              color: isFavorite ? Colors.red : null,
+            ),
+            tooltip: isFavorite ? "Remove from favourites" : "Add to favourites",
+            onPressed: toggleFavorite,
+          ),
+          const HomeButton(),
+        ],
       ),
       body: Padding(
         padding: const EdgeInsets.all(16),
@@ -106,16 +151,8 @@ class _MovieDetailsScreenState extends State<MovieDetailsScreen> {
 
             const SizedBox(height: 20),
 
-            // IMDb Rating
-            Center(
-              child: Text(
-                "⭐ IMDb Rating: ${movie!['imdbRating']}",
-                style: const TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            ),
+            // Ratings & awards
+            RatingsPanel(movie: movie!),
 
             const SizedBox(height: 16),
 

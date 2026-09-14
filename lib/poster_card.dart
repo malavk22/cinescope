@@ -2,21 +2,26 @@ import 'package:flutter/material.dart';
 import 'movie_details_screen.dart';
 import 'movie_model.dart';
 
-// Poster + title tile used by "Popular picks" and "More like this".
+// Poster + title tile used by "Popular picks", "Recommended for you" and
+// "More like this". [onReturn] runs when the user comes back from details.
 class PosterCard extends StatelessWidget {
   final MovieModel movie;
-  const PosterCard({super.key, required this.movie});
+  final VoidCallback? onReturn;
+  const PosterCard({super.key, required this.movie, this.onReturn});
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
       borderRadius: BorderRadius.circular(8),
-      onTap: () => Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (_) => MovieDetailsScreen(imdbID: movie.imdbID),
-        ),
-      ),
+      onTap: () async {
+        await Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (_) => MovieDetailsScreen(imdbID: movie.imdbID),
+          ),
+        );
+        onReturn?.call();
+      },
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
