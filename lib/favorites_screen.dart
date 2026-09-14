@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'api_service.dart';
+import 'home_button.dart';
 import 'movie_details_screen.dart';
 
 class FavoritesScreen extends StatefulWidget {
@@ -56,6 +57,7 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
     return Scaffold(
       appBar: AppBar(
         title: const Text("My Favourites"),
+        actions: const [HomeButton()],
       ),
       body: isLoading
           ? const Center(child: CircularProgressIndicator())
