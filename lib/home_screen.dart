@@ -22,6 +22,8 @@ class _HomeScreenState extends State<HomeScreen> {
   String user = "";
   List<MovieModel> movies = [];
   List<MovieModel> popular = [];
+  List<MovieModel> recommended = [];
+  List<String> topGenres = [];
   List<String> favorites = [];
   bool loading = false;
 
@@ -34,16 +36,29 @@ class _HomeScreenState extends State<HomeScreen> {
     loadPopular();
   }
 
+  // Also runs when coming back from another screen, because favourites
+  // may have changed there.
   Future<void> loadUser() async {
     final prefs = await SharedPreferences.getInstance();
     user = prefs.getString("currentUser") ?? "";
     favorites = prefs.getStringList("${user}_favorites") ?? [];
+    if (!mounted) return;
     setState(() {});
+    loadRecommended();
   }
 
   Future<void> loadPopular() async {
     final list = await Recommendations.popular();
     if (mounted) setState(() => popular = list);
+  }
+
+  Future<void> loadRecommended() async {
+    final result = await Recommendations.forUser(favorites);
+    if (!mounted) return;
+    setState(() {
+      recommended = result.movies;
+      topGenres = result.topGenres;
+    });
   }
 
   String getUserInitials() {
@@ -102,6 +117,29 @@ class _HomeScreenState extends State<HomeScreen> {
 
     await prefs.setStringList("${user}_favorites", favorites);
     setState(() {});
+    loadRecommended();
+  }
+
+  Widget sectionTitle(String title, [String? subtitle]) {
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 12),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            title,
+            style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+          ),
+          if (subtitle != null)
+            Text(
+              subtitle,
+              style: TextStyle(
+                color: Theme.of(context).colorScheme.onSurface.withOpacity(0.7),
+              ),
+            ),
+        ],
+      ),
+    );
   }
 
   @override
@@ -111,7 +149,21 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       backgroundColor: theme.colorScheme.surface,
       appBar: AppBar(
-        title: const Text("CineScope"),
+        // Tapping the title clears the search and shows Popular picks again.
+        title: Tooltip(
+          message: "Home",
+          child: InkWell(
+            borderRadius: BorderRadius.circular(8),
+            onTap: () {
+              searchController.clear();
+              setState(() => movies = []);
+            },
+            child: const Padding(
+              padding: EdgeInsets.symmetric(horizontal: 4, vertical: 2),
+              child: Text("CineScope"),
+            ),
+          ),
+        ),
         actions: [
           PopupMenuButton<int>(
             offset: const Offset(0, 45),
@@ -152,10 +204,11 @@ class _HomeScreenState extends State<HomeScreen> {
             ],
             onSelected: (value) async {
               if (value == 1) {
-                Navigator.push(
+                await Navigator.push(
                   context,
                   MaterialPageRoute(builder: (_) => const FavoritesScreen()),
                 );
+                loadUser();
               } else if (value == 2) {
                 final result = await Navigator.push(
                   context,
@@ -252,30 +305,55 @@ class _HomeScreenState extends State<HomeScreen> {
                             ),
                           ),
                         )
-                      // ------------------- POPULAR PICKS ---------------------
-                      : Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            const Text(
-                              "Popular picks",
-                              style: TextStyle(
-                                fontSize: 20,
-                                fontWeight: FontWeight.bold,
+                      : CustomScrollView(
+                          slivers: [
+                            // ---------------- RECOMMENDED FOR YOU ----------------
+                            if (recommended.isNotEmpty) ...[
+                              SliverToBoxAdapter(
+                                child: sectionTitle(
+                                  "Recommended for you",
+                                  "Because you like ${topGenres.join(" & ")}",
+                                ),
                               ),
-                            ),
-                            const SizedBox(height: 12),
-                            Expanded(
-                              child: GridView.builder(
-                                gridDelegate:
-                                    const SliverGridDelegateWithMaxCrossAxisExtent(
-                                      maxCrossAxisExtent: 140,
-                                      childAspectRatio: 0.52,
-                                      crossAxisSpacing: 12,
-                                      mainAxisSpacing: 16,
+                              SliverToBoxAdapter(
+                                child: SizedBox(
+                                  height: 210,
+                                  child: ListView.separated(
+                                    scrollDirection: Axis.horizontal,
+                                    itemCount: recommended.length,
+                                    separatorBuilder: (_, _) =>
+                                        const SizedBox(width: 12),
+                                    itemBuilder: (context, i) => SizedBox(
+                                      width: 110,
+                                      child: PosterCard(
+                                        movie: recommended[i],
+                                        onReturn: loadUser,
+                                      ),
                                     ),
-                                itemCount: popular.length,
-                                itemBuilder: (context, i) =>
-                                    PosterCard(movie: popular[i]),
+                                  ),
+                                ),
+                              ),
+                              const SliverToBoxAdapter(
+                                child: SizedBox(height: 24),
+                              ),
+                            ],
+
+                            // ------------------- POPULAR PICKS -------------------
+                            SliverToBoxAdapter(
+                              child: sectionTitle("Popular picks"),
+                            ),
+                            SliverGrid.builder(
+                              gridDelegate:
+                                  const SliverGridDelegateWithMaxCrossAxisExtent(
+                                    maxCrossAxisExtent: 140,
+                                    childAspectRatio: 0.52,
+                                    crossAxisSpacing: 12,
+                                    mainAxisSpacing: 16,
+                                  ),
+                              itemCount: popular.length,
+                              itemBuilder: (context, i) => PosterCard(
+                                movie: popular[i],
+                                onReturn: loadUser,
                               ),
                             ),
                           ],
@@ -310,14 +388,15 @@ class _HomeScreenState extends State<HomeScreen> {
                               ),
                               onPressed: () => toggleFavorite(movie.imdbID),
                             ),
-                            onTap: () {
-                              Navigator.push(
+                            onTap: () async {
+                              await Navigator.push(
                                 context,
                                 MaterialPageRoute(
                                   builder: (_) =>
                                       MovieDetailsScreen(imdbID: movie.imdbID),
                                 ),
                               );
+                              loadUser();
                             },
                           ),
                         );
