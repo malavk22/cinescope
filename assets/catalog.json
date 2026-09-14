@@ -1,0 +1,450 @@
+[
+    {
+        "Title":  "The Dark Knight",
+        "Year":  "2008",
+        "imdbID":  "tt0468569",
+        "Genre":  "Action, Crime, Drama",
+        "imdbRating":  "9.1",
+        "Poster":  "https://m.media-amazon.com/images/M/MV5BMTMxNTMwODM0NF5BMl5BanBnXkFtZTcwODAyMTk2Mw@@._V1_QL75_UX380_CR0,0,380,562_.jpg"
+    },
+    {
+        "Title":  "Mad Max: Fury Road",
+        "Year":  "2015",
+        "imdbID":  "tt1392190",
+        "Genre":  "Action, Adventure, Sci-Fi",
+        "imdbRating":  "8.1",
+        "Poster":  "https://m.media-amazon.com/images/M/MV5BZDRkODJhOTgtOTc1OC00NTgzLTk4NjItNDgxZDY4YjlmNDY2XkEyXkFqcGc@._V1_SX300.jpg"
+    },
+    {
+        "Title":  "John Wick",
+        "Year":  "2014",
+        "imdbID":  "tt2911666",
+        "Genre":  "Action, Crime, Thriller",
+        "imdbRating":  "7.5",
+        "Poster":  "https://m.media-amazon.com/images/M/MV5BMTU2NjA1ODgzMF5BMl5BanBnXkFtZTgwMTM2MTI4MjE@._V1_SX300.jpg"
+    },
+    {
+        "Title":  "Gladiator",
+        "Year":  "2000",
+        "imdbID":  "tt0172495",
+        "Genre":  "Action, Adventure, Drama",
+        "imdbRating":  "8.5",
+        "Poster":  "https://m.media-amazon.com/images/M/MV5BYWQ4YmNjYjEtOWE1Zi00Y2U4LWI4NTAtMTU0MjkxNWQ1ZmJiXkEyXkFqcGc@._V1_QL75_UX380_CR0,0,380,562_.jpg"
+    },
+    {
+        "Title":  "The Matrix",
+        "Year":  "1999",
+        "imdbID":  "tt0133093",
+        "Genre":  "Action, Sci-Fi",
+        "imdbRating":  "8.7",
+        "Poster":  "https://m.media-amazon.com/images/M/MV5BN2NmN2VhMTQtMDNiOS00NDlhLTliMjgtODE2ZTY0ODQyNDRhXkEyXkFqcGc@._V1_QL75_UX380_CR0,4,380,562_.jpg"
+    },
+    {
+        "Title":  "Avengers: Endgame",
+        "Year":  "2019",
+        "imdbID":  "tt4154796",
+        "Genre":  "Action, Adventure, Sci-Fi",
+        "imdbRating":  "8.4",
+        "Poster":  "https://m.media-amazon.com/images/M/MV5BMWEyNDM2ZmQtMmFkNi00MTQ1LTk1MjItMzdlZGJlYmIyYzZlXkEyXkFqcGc@._V1_QL75_UX380_CR0,0,380,562_.jpg"
+    },
+    {
+        "Title":  "Top Gun: Maverick",
+        "Year":  "2022",
+        "imdbID":  "tt1745960",
+        "Genre":  "Action, Drama",
+        "imdbRating":  "8.2",
+        "Poster":  "https://m.media-amazon.com/images/M/MV5BMDBkZDNjMWEtOTdmMi00NmExLTg5MmMtNTFlYTJlNWY5YTdmXkEyXkFqcGc@._V1_QL75_UX380_CR0,0,380,562_.jpg"
+    },
+    {
+        "Title":  "Jurassic Park",
+        "Year":  "1993",
+        "imdbID":  "tt0107290",
+        "Genre":  "Action, Adventure, Sci-Fi",
+        "imdbRating":  "8.2",
+        "Poster":  "https://m.media-amazon.com/images/M/MV5BMjM2MDgxMDg0Nl5BMl5BanBnXkFtZTgwNTM2OTM5NDE@._V1_SX300.jpg"
+    },
+    {
+        "Title":  "Pirates of the Caribbean: The Curse of the Black Pearl",
+        "Year":  "2003",
+        "imdbID":  "tt0325980",
+        "Genre":  "Action, Adventure, Fantasy",
+        "imdbRating":  "8.1",
+        "Poster":  "https://m.media-amazon.com/images/M/MV5BNDhlMzEyNzItMTA5Mi00YWRhLThlNTktYTQyMTA0MDIyNDEyXkEyXkFqcGc@._V1_QL75_UX380_CR0,2,380,562_.jpg"
+    },
+    {
+        "Title":  "The Lord of the Rings: The Fellowship of the Ring",
+        "Year":  "2001",
+        "imdbID":  "tt0120737",
+        "Genre":  "Adventure, Drama, Fantasy",
+        "imdbRating":  "8.9",
+        "Poster":  "https://m.media-amazon.com/images/M/MV5BNzIxMDQ2YTctNDY4MC00ZTRhLTk4ODQtMTVlOWY4NTdiYmMwXkEyXkFqcGc@._V1_QL75_UX380_CR0,1,380,562_.jpg"
+    },
+    {
+        "Title":  "Harry Potter and the Sorcerer\u0027s Stone",
+        "Year":  "2001",
+        "imdbID":  "tt0241527",
+        "Genre":  "Adventure, Family, Fantasy",
+        "imdbRating":  "7.7",
+        "Poster":  "https://m.media-amazon.com/images/M/MV5BNTU1MzgyMDMtMzBlZS00YzczLThmYWEtMjU3YmFlOWEyMjE1XkEyXkFqcGc@._V1_SX300.jpg"
+    },
+    {
+        "Title":  "Avatar",
+        "Year":  "2009",
+        "imdbID":  "tt0499549",
+        "Genre":  "Action, Adventure, Fantasy",
+        "imdbRating":  "7.9",
+        "Poster":  "https://m.media-amazon.com/images/M/MV5BMDEzMmQwZjctZWU2My00MWNlLWE0NjItMDJlYTRlNGJiZjcyXkEyXkFqcGc@._V1_SX300.jpg"
+    },
+    {
+        "Title":  "Inception",
+        "Year":  "2010",
+        "imdbID":  "tt1375666",
+        "Genre":  "Action, Adventure, Sci-Fi",
+        "imdbRating":  "8.8",
+        "Poster":  "https://m.media-amazon.com/images/M/MV5BMjAxMzY3NjcxNF5BMl5BanBnXkFtZTcwNTI5OTM0Mw@@._V1_QL75_UX380_CR0,0,380,562_.jpg"
+    },
+    {
+        "Title":  "Interstellar",
+        "Year":  "2014",
+        "imdbID":  "tt0816692",
+        "Genre":  "Adventure, Drama, Sci-Fi",
+        "imdbRating":  "8.7",
+        "Poster":  "https://m.media-amazon.com/images/M/MV5BYzdjMDAxZGItMjI2My00ODA1LTlkNzItOWFjMDU5ZDJlYWY3XkEyXkFqcGc@._V1_QL75_UX380_CR0,0,380,562_.jpg"
+    },
+    {
+        "Title":  "Blade Runner 2049",
+        "Year":  "2017",
+        "imdbID":  "tt1856101",
+        "Genre":  "Action, Drama, Mystery",
+        "imdbRating":  "8.0",
+        "Poster":  "https://m.media-amazon.com/images/M/MV5BNzA1Njg4NzYxOV5BMl5BanBnXkFtZTgwODk5NjU3MzI@._V1_QL75_UX380_CR0,0,380,562_.jpg"
+    },
+    {
+        "Title":  "Dune: Part One",
+        "Year":  "2021",
+        "imdbID":  "tt1160419",
+        "Genre":  "Action, Adventure, Drama",
+        "imdbRating":  "8.0",
+        "Poster":  "https://m.media-amazon.com/images/M/MV5BNWIyNmU5MGYtZDZmNi00ZjAwLWJlYjgtZTc0ZGIxMDE4ZGYwXkEyXkFqcGc@._V1_QL75_UY562_CR1,0,380,562_.jpg"
+    },
+    {
+        "Title":  "Arrival",
+        "Year":  "2016",
+        "imdbID":  "tt2543164",
+        "Genre":  "Drama, Mystery, Sci-Fi",
+        "imdbRating":  "7.9",
+        "Poster":  "https://m.media-amazon.com/images/M/MV5BMTExMzU0ODcxNDheQTJeQWpwZ15BbWU4MDE1OTI4MzAy._V1_SX300.jpg"
+    },
+    {
+        "Title":  "The Martian",
+        "Year":  "2015",
+        "imdbID":  "tt3659388",
+        "Genre":  "Adventure, Drama, Sci-Fi",
+        "imdbRating":  "8.0",
+        "Poster":  "https://m.media-amazon.com/images/M/MV5BMTc2MTQ3MDA1Nl5BMl5BanBnXkFtZTgwODA3OTI4NjE@._V1_SX300.jpg"
+    },
+    {
+        "Title":  "The Shawshank Redemption",
+        "Year":  "1994",
+        "imdbID":  "tt0111161",
+        "Genre":  "Drama",
+        "imdbRating":  "9.3",
+        "Poster":  "https://m.media-amazon.com/images/M/MV5BMDAyY2FhYjctNDc5OS00MDNlLThiMGUtY2UxYWVkNGY2ZjljXkEyXkFqcGc@._V1_QL75_UX380_CR0,4,380,562_.jpg"
+    },
+    {
+        "Title":  "Forrest Gump",
+        "Year":  "1994",
+        "imdbID":  "tt0109830",
+        "Genre":  "Drama, Romance",
+        "imdbRating":  "8.8",
+        "Poster":  "https://m.media-amazon.com/images/M/MV5BNDYwNzVjMTItZmU5YS00YjQ5LTljYjgtMjY2NDVmYWMyNWFmXkEyXkFqcGc@._V1_QL75_UY562_CR4,0,380,562_.jpg"
+    },
+    {
+        "Title":  "Fight Club",
+        "Year":  "1999",
+        "imdbID":  "tt0137523",
+        "Genre":  "Crime, Drama, Thriller",
+        "imdbRating":  "8.8",
+        "Poster":  "https://m.media-amazon.com/images/M/MV5BOTgyOGQ1NDItNGU3Ny00MjU3LTg2YWEtNmEyYjBiMjI1Y2M5XkEyXkFqcGc@._V1_QL75_UX380_CR0,4,380,562_.jpg"
+    },
+    {
+        "Title":  "The Godfather",
+        "Year":  "1972",
+        "imdbID":  "tt0068646",
+        "Genre":  "Crime, Drama",
+        "imdbRating":  "9.2",
+        "Poster":  "https://m.media-amazon.com/images/M/MV5BNGEwYjgwOGQtYjg5ZS00Njc1LTk2ZGEtM2QwZWQ2NjdhZTE5XkEyXkFqcGc@._V1_QL75_UY562_CR8,0,380,562_.jpg"
+    },
+    {
+        "Title":  "Whiplash",
+        "Year":  "2014",
+        "imdbID":  "tt2582802",
+        "Genre":  "Drama, Music",
+        "imdbRating":  "8.5",
+        "Poster":  "https://m.media-amazon.com/images/M/MV5BMDFjOWFkYzktYzhhMC00NmYyLTkwY2EtYjViMDhmNzg0OGFkXkEyXkFqcGc@._V1_SX300.jpg"
+    },
+    {
+        "Title":  "12 Angry Men",
+        "Year":  "1957",
+        "imdbID":  "tt0050083",
+        "Genre":  "Crime, Drama",
+        "imdbRating":  "9.0",
+        "Poster":  "https://m.media-amazon.com/images/M/MV5BYjE4NzdmOTYtYjc5Yi00YzBiLWEzNDEtNTgxZGQ2MWVkN2NiXkEyXkFqcGc@._V1_QL75_UX380_CR0,11,380,562_.jpg"
+    },
+    {
+        "Title":  "Pulp Fiction",
+        "Year":  "1994",
+        "imdbID":  "tt0110912",
+        "Genre":  "Crime, Drama",
+        "imdbRating":  "8.8",
+        "Poster":  "https://m.media-amazon.com/images/M/MV5BYTViYTE3ZGQtNDBlMC00ZTAyLTkyODMtZGRiZDg0MjA2YThkXkEyXkFqcGc@._V1_QL75_UY562_CR3,0,380,562_.jpg"
+    },
+    {
+        "Title":  "Seven",
+        "Year":  "1995",
+        "imdbID":  "tt0114369",
+        "Genre":  "Crime, Drama, Mystery",
+        "imdbRating":  "8.6",
+        "Poster":  "https://m.media-amazon.com/images/M/MV5BY2IzNzMxZjctZjUxZi00YzAxLTk3ZjMtODFjODdhMDU5NDM1XkEyXkFqcGc@._V1_QL75_UX380_CR0,16,380,562_.jpg"
+    },
+    {
+        "Title":  "The Departed",
+        "Year":  "2006",
+        "imdbID":  "tt0407887",
+        "Genre":  "Crime, Drama, Thriller",
+        "imdbRating":  "8.5",
+        "Poster":  "https://m.media-amazon.com/images/M/MV5BMTI1MTY2OTIxNV5BMl5BanBnXkFtZTYwNjQ4NjY3._V1_QL75_UY562_CR0,0,380,562_.jpg"
+    },
+    {
+        "Title":  "Parasite",
+        "Year":  "2019",
+        "imdbID":  "tt6751668",
+        "Genre":  "Drama, Thriller",
+        "imdbRating":  "8.5",
+        "Poster":  "https://m.media-amazon.com/images/M/MV5BYjk1Y2U4MjQtY2ZiNS00OWQyLWI3MmYtZWUwNmRjYWRiNWNhXkEyXkFqcGc@._V1_SX300.jpg"
+    },
+    {
+        "Title":  "Joker",
+        "Year":  "2019",
+        "imdbID":  "tt7286456",
+        "Genre":  "Crime, Drama, Thriller",
+        "imdbRating":  "8.3",
+        "Poster":  "https://m.media-amazon.com/images/M/MV5BNzY3OWQ5NDktNWQ2OC00ZjdlLThkMmItMDhhNDk3NTFiZGU4XkEyXkFqcGc@._V1_QL75_UX380_CR0,0,380,562_.jpg"
+    },
+    {
+        "Title":  "Gone Girl",
+        "Year":  "2014",
+        "imdbID":  "tt2267998",
+        "Genre":  "Drama, Mystery, Thriller",
+        "imdbRating":  "8.1",
+        "Poster":  "https://m.media-amazon.com/images/M/MV5BMTk0MDQ3MzAzOV5BMl5BanBnXkFtZTgwNzU1NzE3MjE@._V1_QL75_UY562_CR1,0,380,562_.jpg"
+    },
+    {
+        "Title":  "The Silence of the Lambs",
+        "Year":  "1991",
+        "imdbID":  "tt0102926",
+        "Genre":  "Crime, Drama, Horror",
+        "imdbRating":  "8.6",
+        "Poster":  "https://m.media-amazon.com/images/M/MV5BNDdhOGJhYzctYzYwZC00YmI2LWI0MjctYjg4ODdlMDExYjBlXkEyXkFqcGc@._V1_QL75_UY562_CR1,0,380,562_.jpg"
+    },
+    {
+        "Title":  "The Grand Budapest Hotel",
+        "Year":  "2014",
+        "imdbID":  "tt2278388",
+        "Genre":  "Comedy, Drama",
+        "imdbRating":  "8.1",
+        "Poster":  "https://m.media-amazon.com/images/M/MV5BMzM5NjUxOTEyMl5BMl5BanBnXkFtZTgwNjEyMDM0MDE@._V1_QL75_UX380_CR0,0,380,562_.jpg"
+    },
+    {
+        "Title":  "Superbad",
+        "Year":  "2007",
+        "imdbID":  "tt0829482",
+        "Genre":  "Comedy",
+        "imdbRating":  "7.6",
+        "Poster":  "https://m.media-amazon.com/images/M/MV5BNjk0MzdlZGEtNTRkOC00ZDRiLWJkYjAtMzUzYTRiNzk1YTViXkEyXkFqcGc@._V1_SX300.jpg"
+    },
+    {
+        "Title":  "The Hangover",
+        "Year":  "2009",
+        "imdbID":  "tt1119646",
+        "Genre":  "Comedy",
+        "imdbRating":  "7.7",
+        "Poster":  "https://m.media-amazon.com/images/M/MV5BNDI2MzBhNzgtOWYyOS00NDM2LWE0OGYtOGQ0M2FjMTI2NTllXkEyXkFqcGc@._V1_SX300.jpg"
+    },
+    {
+        "Title":  "Home Alone",
+        "Year":  "1990",
+        "imdbID":  "tt0099785",
+        "Genre":  "Comedy, Family",
+        "imdbRating":  "7.8",
+        "Poster":  "https://m.media-amazon.com/images/M/MV5BNzNmNmQ2ZDEtMTc1MS00NjNiLThlMGUtZmQxNTg1Nzg5NWMzXkEyXkFqcGc@._V1_SX300.jpg"
+    },
+    {
+        "Title":  "Spirited Away",
+        "Year":  "2003",
+        "imdbID":  "tt0245429",
+        "Genre":  "Animation, Adventure, Family",
+        "imdbRating":  "8.6",
+        "Poster":  "https://m.media-amazon.com/images/M/MV5BNTEyNmEwOWUtYzkyOC00ZTQ4LTllZmUtMjk0Y2YwOGUzYjRiXkEyXkFqcGc@._V1_QL75_UX380_CR0,0,380,562_.jpg"
+    },
+    {
+        "Title":  "Toy Story",
+        "Year":  "1995",
+        "imdbID":  "tt0114709",
+        "Genre":  "Animation, Adventure, Comedy",
+        "imdbRating":  "8.3",
+        "Poster":  "https://m.media-amazon.com/images/M/MV5BZTA3OWVjOWItNjE1NS00NzZiLWE1MjgtZDZhMWI1ZTlkNzYwXkEyXkFqcGc@._V1_SX300.jpg"
+    },
+    {
+        "Title":  "Up",
+        "Year":  "2009",
+        "imdbID":  "tt1049413",
+        "Genre":  "Animation, Adventure, Comedy",
+        "imdbRating":  "8.3",
+        "Poster":  "https://m.media-amazon.com/images/M/MV5BNmI1ZTc5MWMtMDYyOS00ZDc2LTkzOTAtNjQ4NWIxNjYyNDgzXkEyXkFqcGc@._V1_SX300.jpg"
+    },
+    {
+        "Title":  "Coco",
+        "Year":  "2017",
+        "imdbID":  "tt2380307",
+        "Genre":  "Animation, Adventure, Drama",
+        "imdbRating":  "8.4",
+        "Poster":  "https://m.media-amazon.com/images/M/MV5BMDIyM2E2NTAtMzlhNy00ZGUxLWI1NjgtZDY5MzhiMDc5NGU3XkEyXkFqcGc@._V1_QL75_UY562_CR7,0,380,562_.jpg"
+    },
+    {
+        "Title":  "Spider-Man: Into the Spider-Verse",
+        "Year":  "2018",
+        "imdbID":  "tt4633694",
+        "Genre":  "Animation, Action, Adventure",
+        "imdbRating":  "8.4",
+        "Poster":  "https://m.media-amazon.com/images/M/MV5BMjMwNDkxMTgzOF5BMl5BanBnXkFtZTgwNTkwNTQ3NjM@._V1_SX300.jpg"
+    },
+    {
+        "Title":  "WALL·E",
+        "Year":  "2008",
+        "imdbID":  "tt0910970",
+        "Genre":  "Animation, Adventure, Family",
+        "imdbRating":  "8.4",
+        "Poster":  "https://m.media-amazon.com/images/M/MV5BMjExMTg5OTU0NF5BMl5BanBnXkFtZTcwMjMxMzMzMw@@._V1_SX300.jpg"
+    },
+    {
+        "Title":  "The Lion King",
+        "Year":  "1994",
+        "imdbID":  "tt0110357",
+        "Genre":  "Animation, Adventure, Drama",
+        "imdbRating":  "8.5",
+        "Poster":  "https://m.media-amazon.com/images/M/MV5BZGRiZDZhZjItM2M3ZC00Y2IyLTk3Y2MtMWY5YjliNDFkZTJlXkEyXkFqcGc@._V1_SX300.jpg"
+    },
+    {
+        "Title":  "Get Out",
+        "Year":  "2017",
+        "imdbID":  "tt5052448",
+        "Genre":  "Horror, Mystery, Thriller",
+        "imdbRating":  "7.8",
+        "Poster":  "https://m.media-amazon.com/images/M/MV5BMjUxMDQwNjcyNl5BMl5BanBnXkFtZTgwNzcwMzc0MTI@._V1_QL75_UX380_CR0,0,380,562_.jpg"
+    },
+    {
+        "Title":  "The Conjuring",
+        "Year":  "2013",
+        "imdbID":  "tt1457767",
+        "Genre":  "Horror, Mystery, Thriller",
+        "imdbRating":  "7.5",
+        "Poster":  "https://m.media-amazon.com/images/M/MV5BMTM3NjA1NDMyMV5BMl5BanBnXkFtZTcwMDQzNDMzOQ@@._V1_QL75_UX380_CR0,0,380,562_.jpg"
+    },
+    {
+        "Title":  "A Quiet Place",
+        "Year":  "2018",
+        "imdbID":  "tt6644200",
+        "Genre":  "Drama, Horror, Sci-Fi",
+        "imdbRating":  "7.5",
+        "Poster":  "https://m.media-amazon.com/images/M/MV5BMjI0MDMzNTQ0M15BMl5BanBnXkFtZTgwMTM5NzM3NDM@._V1_SX300.jpg"
+    },
+    {
+        "Title":  "Hereditary",
+        "Year":  "2018",
+        "imdbID":  "tt7784604",
+        "Genre":  "Drama, Horror, Mystery",
+        "imdbRating":  "7.3",
+        "Poster":  "https://m.media-amazon.com/images/M/MV5BNTEyZGQwODctYWJjZi00NjFmLTg3YmEtMzlhNjljOGZhMWMyXkEyXkFqcGc@._V1_QL75_UX380_CR0,0,380,562_.jpg"
+    },
+    {
+        "Title":  "The Shining",
+        "Year":  "1980",
+        "imdbID":  "tt0081505",
+        "Genre":  "Drama, Horror",
+        "imdbRating":  "8.4",
+        "Poster":  "https://m.media-amazon.com/images/M/MV5BNmM5ZThhY2ItOGRjOS00NzZiLWEwYTItNDgyMjFkOTgxMmRiXkEyXkFqcGc@._V1_SX300.jpg"
+    },
+    {
+        "Title":  "Titanic",
+        "Year":  "1997",
+        "imdbID":  "tt0120338",
+        "Genre":  "Drama, Romance",
+        "imdbRating":  "8.0",
+        "Poster":  "https://m.media-amazon.com/images/M/MV5BYzYyN2FiZmUtYWYzMy00MzViLWJkZTMtOGY1ZjgzNWMwN2YxXkEyXkFqcGc@._V1_QL75_UX380_CR0,2,380,562_.jpg"
+    },
+    {
+        "Title":  "La La Land",
+        "Year":  "2016",
+        "imdbID":  "tt3783958",
+        "Genre":  "Comedy, Drama, Music",
+        "imdbRating":  "8.0",
+        "Poster":  "https://m.media-amazon.com/images/M/MV5BMzUzNDM2NzM2MV5BMl5BanBnXkFtZTgwNTM3NTg4OTE@._V1_QL75_UX380_CR0,0,380,562_.jpg"
+    },
+    {
+        "Title":  "The Notebook",
+        "Year":  "2004",
+        "imdbID":  "tt0332280",
+        "Genre":  "Drama, Romance",
+        "imdbRating":  "7.8",
+        "Poster":  "https://m.media-amazon.com/images/M/MV5BZjE0ZjgzMzYtMTAxYi00NGMzLThmZDktNzFlMzA2MWRmYWQ0XkEyXkFqcGc@._V1_QL75_UX380_CR0,4,380,562_.jpg"
+    },
+    {
+        "Title":  "Pride \u0026 Prejudice",
+        "Year":  "2005",
+        "imdbID":  "tt0414387",
+        "Genre":  "Drama, Romance",
+        "imdbRating":  "7.8",
+        "Poster":  "https://m.media-amazon.com/images/M/MV5BMTA1NDQ3NTcyOTNeQTJeQWpwZ15BbWU3MDA0MzA4MzE@._V1_SX300.jpg"
+    },
+    {
+        "Title":  "About Time",
+        "Year":  "2013",
+        "imdbID":  "tt2194499",
+        "Genre":  "Comedy, Drama, Fantasy",
+        "imdbRating":  "7.8",
+        "Poster":  "https://m.media-amazon.com/images/M/MV5BMTA1ODUzMDA3NzFeQTJeQWpwZ15BbWU3MDgxMTYxNTk@._V1_SX300.jpg"
+    },
+    {
+        "Title":  "3 Idiots",
+        "Year":  "2009",
+        "imdbID":  "tt1187043",
+        "Genre":  "Comedy, Drama",
+        "imdbRating":  "8.4",
+        "Poster":  "https://m.media-amazon.com/images/M/MV5BNzc4ZWQ3NmYtODE0Ny00YTQ4LTlkZWItNTBkMGQ0MmUwMmJlXkEyXkFqcGc@._V1_SX300.jpg"
+    },
+    {
+        "Title":  "Dangal",
+        "Year":  "2016",
+        "imdbID":  "tt5074352",
+        "Genre":  "Action, Biography, Drama",
+        "imdbRating":  "8.3",
+        "Poster":  "https://m.media-amazon.com/images/M/MV5BMTQ4MzQzMzM2Nl5BMl5BanBnXkFtZTgwMTQ1NzU3MDI@._V1_SX300.jpg"
+    },
+    {
+        "Title":  "RRR",
+        "Year":  "2022",
+        "imdbID":  "tt8178634",
+        "Genre":  "Action, Adventure, Drama",
+        "imdbRating":  "7.8",
+        "Poster":  "https://m.media-amazon.com/images/M/MV5BNWMwODYyMjQtMTczMi00NTQ1LWFkYjItMGJhMWRkY2E3NDAyXkEyXkFqcGc@._V1_SX300.jpg"
+    },
+    {
+        "Title":  "Lagaan: Once Upon a Time in India",
+        "Year":  "2001",
+        "imdbID":  "tt0169102",
+        "Genre":  "Drama, Musical, Sport",
+        "imdbRating":  "8.1",
+        "Poster":  "https://m.media-amazon.com/images/M/MV5BM2FmODM4OTktOTRjOS00ZTIzLWIzZjAtMDBhOGEzYThkNzMzXkEyXkFqcGc@._V1_SX300.jpg"
+    }
+]

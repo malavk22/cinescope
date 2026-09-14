@@ -1,0 +1,16 @@
+{
+  // This is a Flutter project: stop the Java/Gradle extensions from
+  // importing and building the android/ folder as a Java project.
+  "java.import.gradle.enabled": false,
+  "java.import.maven.enabled": false,
+  "java.gradle.buildServer.enabled": "off",
+  "java.autobuild.enabled": false,
+  "java.import.exclusions": [
+    "**/node_modules/**",
+    "**/.metadata/**",
+    "**/archetype-resources/**",
+    "**/META-INF/maven/**",
+    "**/android/**"
+  ],
+  "gradle.autoDetect": "off"
+}
